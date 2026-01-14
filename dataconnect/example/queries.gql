@@ -1,0 +1,27 @@
+mutation CreateUser($displayName: String!, $email: String!) @auth(level: USER) {
+  user_insert(data: {displayName: $displayName, email: $email, createdAt_expr: "request.time"})
+}
+
+query GetPresentation($id: UUID!) @auth(level: USER) {
+  presentation(id: $id) {
+    id
+    title
+    description
+    originalScript
+    targetLanguage
+  }
+}
+
+mutation CreatePracticeSession($presentationId: UUID!, $spokenText: String!, $sessionDate: Date!) @auth(level: USER) {
+  practiceSession_insert(data: {presentationId: $presentationId, userId_expr: "auth.uid", spokenText: $spokenText, sessionDate: $sessionDate, createdAt_expr: "request.time"})
+}
+
+query ListPracticeSessions @auth(level: USER) {
+  practiceSessions(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    presentation {
+      title
+    }
+    sessionDate
+  }
+}

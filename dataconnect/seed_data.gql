@@ -1,0 +1,88 @@
+mutation CreateSeedData @auth(level: PUBLIC, insecureReason: "This mutation is safe to expose to the public for demonstration purposes.") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      email: "demouser1@example.com",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      email: "demouser2@example.com",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+  presentation_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      title: "Demo Presentation 1",
+      originalScript: "This is the original script for demo presentation 1.",
+      targetLanguage: "en",
+      createdAt: "2024-01-02T00:00:00Z"
+    },
+    {
+      id: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      title: "Demo Presentation 2",
+      originalScript: "This is the original script for demo presentation 2.",
+      targetLanguage: "es",
+      createdAt: "2024-01-02T00:00:00Z"
+    }
+  ])
+  practiceSession_insertMany(data: [
+    {
+      id: "750e8400-e29b-41d4-a716-446655440000",
+      presentationId: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      sessionDate: "2024-01-03",
+      spokenText: "This is the spoken text for demo practice session 1.",
+      createdAt: "2024-01-03T00:00:00Z"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440001",
+      presentationId: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      sessionDate: "2024-01-03",
+      spokenText: "This is the spoken text for demo practice session 2.",
+      createdAt: "2024-01-03T00:00:00Z"
+    }
+  ])
+  evaluation_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440000",
+      practiceSessionId: "750e8400-e29b-41d4-a716-446655440000",
+      feedbackText: "This is the feedback text for demo evaluation 1.",
+      fluencyScore: 0.8,
+      pronunciationScore: 0.9,
+      score: 85,
+      createdAt: "2024-01-04T00:00:00Z"
+    },
+    {
+      id: "850e8400-e29b-41d4-a716-446655440001",
+      practiceSessionId: "750e8400-e29b-41d4-a716-446655440001",
+      feedbackText: "This is the feedback text for demo evaluation 2.",
+      fluencyScore: 0.7,
+      pronunciationScore: 0.8,
+      score: 75,
+      createdAt: "2024-01-04T00:00:00Z"
+    }
+  ])
+  translation_insertMany(data: [
+    {
+      id: "950e8400-e29b-41d4-a716-446655440000",
+      presentationId: "650e8400-e29b-41d4-a716-446655440000",
+      sourceLanguage: "en",
+      translatedScript: "This is the translated script for demo translation 1.",
+      createdAt: "2024-01-05T00:00:00Z"
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440001",
+      presentationId: "650e8400-e29b-41d4-a716-446655440001",
+      sourceLanguage: "es",
+      translatedScript: "This is the translated script for demo translation 2.",
+      createdAt: "2024-01-05T00:00:00Z"
+    }
+  ])
+}

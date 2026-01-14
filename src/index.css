@@ -1,0 +1,52 @@
+:root {
+  /* Brand Colors */
+  --color-primary: #a7f3d0; /* Verde Menta */
+  --color-secondary: #c4b5fd; /* Lilás Suave */
+  --color-accent: #6ee7b7; /* Variação mais forte do menta para hover/active */
+
+  /* Backgrounds & Text */
+  --color-bg-body: #f9fafb; /* Off-white cinzento (Gray 50) */
+  --color-bg-card: #ffffff;
+  --color-text-main: #111827; /* Gray 900 */
+  --color-text-muted: #6b7280; /* Gray 500 */
+
+  /* UI Elements */
+  --border-radius-lg: 32px;
+  --border-radius-md: 16px;
+  --border-radius-sm: 8px;
+
+  --font-family-main: "Inter", system-ui, -apple-system, sans-serif;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+body {
+  font-family: var(--font-family-main);
+  background-color: var(--color-bg-body);
+  color: var(--color-text-main);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000000; /* Preto Puro para contraste */
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+button {
+  font-family: inherit;
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.98);
+}

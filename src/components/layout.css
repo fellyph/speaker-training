@@ -1,0 +1,158 @@
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  background-color: #fff;
+  border-right: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  z-index: 10;
+}
+
+.sidebar-brand {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.nav-item:hover {
+  background-color: var(--color-bg-body);
+  color: var(--color-text-main);
+}
+
+.nav-item.active {
+  background-color: #F3F4F6;
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+.nav-item svg {
+  color: var(--color-text-muted);
+}
+
+.nav-item.active svg {
+  color: var(--color-secondary);
+}
+
+.nav-spacer {
+  flex: 1;
+}
+
+.btn-logout {
+  margin-top: auto;
+  margin-bottom: 2rem;
+  color: #EF4444;
+}
+
+.btn-logout:hover {
+  background-color: #FEF2F2;
+  color: #B91C1C;
+}
+
+.sidebar-user {
+  padding: 1.5rem;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #065F46;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--color-text-main);
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.content-area {
+  flex: 1;
+  margin-left: 280px;
+  padding: 3rem;
+  background-color: var(--color-bg-body);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 80px;
+  }
+  .sidebar-brand span, 
+  .nav-item span, 
+  .user-info {
+    display: none;
+  }
+  .content-area {
+    margin-left: 80px;
+  }
+  .sidebar-brand {
+    justify-content: center;
+    padding: 2rem 0;
+  }
+  .nav-item {
+    justify-content: center;
+  }
+}

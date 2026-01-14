@@ -1,0 +1,39 @@
+type User @table {
+  displayName: String!
+  email: String!
+  createdAt: Timestamp!
+  photoUrl: String
+}
+
+type Presentation @table {
+  user: User!
+  title: String!
+  originalScript: String!
+  targetLanguage: String!
+  createdAt: Timestamp!
+  description: String
+}
+
+type Translation @table {
+  presentation: Presentation!
+  translatedScript: String!
+  createdAt: Timestamp!
+  sourceLanguage: String
+}
+
+type PracticeSession @table {
+  user: User!
+  presentation: Presentation!
+  sessionDate: Date!
+  spokenText: String!
+  createdAt: Timestamp!
+}
+
+type Evaluation @table {
+  practiceSession: PracticeSession!
+  score: Int!
+  feedbackText: String!
+  createdAt: Timestamp!
+  pronunciationScore: Float
+  fluencyScore: Float
+}
