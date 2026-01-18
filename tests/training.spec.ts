@@ -4,20 +4,52 @@ import { test, expect } from '@playwright/test';
 // For real E2E, we'd use a test account or mock auth.
 // This is a UI-structure test.
 
-test.describe('Training Flow UI', () => {
-  test.skip('should navigate through training steps', async ({ page }) => {
-    // This would require being logged in. 
-    // In a real scenario, we'd use global setup for auth.
+test.describe('Training Flow (US-001 & US-002)', () => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('/train');
-    
-    // Step: Input
+  });
+
+  test('should allow script preparation (US-001)', async ({ page }) => {
+    // Check initial state
     await expect(page.locator('h1')).toContainText('New Presentation');
-    await page.fill('textarea', 'I want to practice my speech about coding.');
     
-    // Trigger generation (this calls Gemini, might be slow/mocked)
-    // await page.click('button:has-text("Generate Script")');
+    // Fill configuration
+    await page.selectOption('select >> nth=0', 'pt-BR'); // Native
+    await page.selectOption('select >> nth=1', 'en-US'); // Target
+    await page.selectOption('select >> nth=2', 'informal'); // Tone
     
-    // Step: Preview (would appear after generation)
-    // await expect(page.locator('h1')).toContainText('Generated Script');
+    const textarea = page.locator('textarea');
+    await textarea.fill('I want to talk about my experience with React and Playwright.');
+    
+    // Check button
+    const generateBtn = page.getByRole('button', { name: 'Generate Script' });
+    await expect(generateBtn).toBeVisible();
+    await expect(generateBtn).not.toBeDisabled();
+  });
+
+  test('should navigate to practice mode after script generation', async ({ page }) => {
+    // This test might be slow or fail if Gemini service is not mocked/working, 
+    // but we are testing the UI flow.
+    await page.locator('textarea').fill('Simple test script.');
+    await page.getByRole('button', { name: 'Generate Script' }).click();
+    
+    // Wait for step transition to preview
+    // Using a longer timeout because of AI generation
+    await expect(page.locator('h1')).toContainText('Generated Script', { timeout: 30000 });
+    
+    // Transition to practice
+    await page.getByRole('button', { name: 'Start Practice' }).click();
+    await expect(page.locator('.teleprompter-badge')).toContainText('Practice Mode');
+  });
+
+  test('should show recording controls in practice mode (US-002)', async ({ page }) => {
+    // Mocking the flow to reach practice mode directly if possible or going through it
+    await page.locator('textarea').fill('Practice session test.');
+    await page.getByRole('button', { name: 'Generate Script' }).click();
+    await page.getByRole('button', { name: 'Start Practice' }).click();
+    
+    // Check recording UI
+    await expect(page.getByRole('button', { name: 'Start Recording' })).toBeVisible();
+    await expect(page.locator('.timer')).toBeVisible();
   });
 });
